@@ -18,10 +18,11 @@ class LimitedStorage(FileSystemStorage):
 
 
     def _save(self, name, content):
-        max_size_bytes = 700 * 1024 * 1024  # 500 MB
+        storage_limit = 500
+        max_size_bytes = storage_limit * 1024 * 1024  # 500 MB
         current_size_bytes = self.get_media_directory_size()
 
         if current_size_bytes + content.size > max_size_bytes:
-            raise StorageSizeLimitExceeded("Storage space limit reached. Cannot upload more files.")
+            raise StorageSizeLimitExceeded(f"Storage space limit reached ({storage_limit} MB). Cannot upload more files.")
 
         return super()._save(name, content)
