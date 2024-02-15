@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseBadRequest
 from django.conf import settings
 
-from .models import Photo
+from .models import Photo, Gallery
 from .forms import ImageUploadForm
 from .storage import StorageSizeLimitExceeded
 

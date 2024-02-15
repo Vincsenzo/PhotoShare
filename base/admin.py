@@ -1,7 +1,7 @@
 from django.contrib import admin
 import os
 
-from .models import Photo
+from .models import Photo, Gallery, GalleryAccess
 
 
 def delete_model(modeladmin, request, queryset):
@@ -18,3 +18,5 @@ class PhotoAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Photo, PhotoAdmin)
+admin.site.register(Gallery)
+admin.site.register(GalleryAccess)
