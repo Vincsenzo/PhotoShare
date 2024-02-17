@@ -1,0 +1,14 @@
+{% extends "base/base.html" %}
+{% block content %}
+
+<a href="{% url "base:create_gallery" %}">Create new gallery</a>
+
+<ul>
+{% for gallery in galleries %}
+    <li>
+        <a href="{% url 'base:individual_galley' pk=gallery.id %}">{{gallery.title}}</a>
+    </li>
+{% endfor %}
+</ul>
+
+{% endblock content %}

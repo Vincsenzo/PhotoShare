@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Photo
+from .models import Photo, Gallery
 
 
 class MultipleFileInput(forms.ClearableFileInput):
@@ -21,5 +21,15 @@ class MultipleFileField(forms.FileField):
         return result
 
 
-class ImageUploadForm(forms.Form):
+class ImageUploadForm(forms.ModelForm):
     images = MultipleFileField()
+
+    class Meta:
+        model = Photo
+        fields = []
+
+
+class GalleyForm(forms.ModelForm):
+    class Meta:
+        model = Gallery
+        fields = '__all__'
