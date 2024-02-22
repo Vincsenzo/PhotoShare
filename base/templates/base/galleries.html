@@ -1,14 +1,45 @@
 {% extends "base/base.html" %}
 {% block content %}
 
-<a href="{% url "base:create_gallery" %}">Create new gallery</a>
+<style>
+.gallery {
+    display: block;
+    text-decoration: none;
+    color: white;
+    padding: 5px;
+    background-color: grey;
+    border-radius: 5px;
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.gallery:hover {
+    background-color: darkgrey;
+}
+.gallery-div {
+    padding: 5px;
+    display: inline-block;
+    width: 100%;
+    max-width: 550px;
+}
+.parent {
+display: flex;
+justify-content: center; 
+align-items: center; 
+flex-direction: column;
+}
+@media screen and (max-width: 600px) {
+        .gallery-div {
+            width: 90%; /* Adjust width for smaller screens */
+            max-width: none; /* Remove maximum width for smaller screens */
+        }
+    }
+</style>
 
-<ul>
-{% for gallery in galleries %}
-    <li>
-        <a href="{% url 'base:individual_galley' pk=gallery.id %}">{{gallery.title}}</a>
-    </li>
-{% endfor %}
-</ul>
+<div class="parent">
+    <div class="gallery-div"><a href="{% url "base:create_gallery" %}" class="gallery">+ Create new gallery</a></div>
+    {% for gallery in galleries %}
+    <div class="gallery-div"><a href="{% url 'base:individual_galley' pk=gallery.id %}" class="gallery">{{gallery.title}}</a></div>
+    {% endfor %}
+</div>
 
 {% endblock content %}

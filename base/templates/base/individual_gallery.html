@@ -50,11 +50,14 @@
         text-align: center;
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
+    .upload-new:hover {
+        background-color: darkgrey;
+    }
 </style>
 
 <div class="grid-container">
-    <div class="grid-item"><a class="upload-new" href="{% url "base:photo_upolad_to_gallery" pk=pk %}">Upload new images</a></div>
-    <div class="grid-item"><a class="upload-new" href="{% url "base:download_all" %}">Download all</a></div>
+    <div class="grid-item"><a class="upload-new" href="{% url "base:photo_upolad_to_gallery" pk=pk %}">+ Upload new images</a></div>
+    <div class="grid-item"><a class="upload-new" href="{% url "base:download_all" pk=pk %}">Download all</a></div>
     <div class="grid-item"><a class="upload-new" href="{% url "base:galleries" %}">Galleries</a></div>
 </div>
 

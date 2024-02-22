@@ -10,33 +10,11 @@ from .storage import StorageSizeLimitExceeded
 
 
 def index(request):
-    images = Photo.objects.all()
-    context = {'images': images}
-    return render(request, 'base/index.html', context)
+    return redirect('base:galleries')
 
 
-def upload_photo(request):
-    if request.method == "POST":
-        form = ImageUploadForm(request.POST, request.FILES)
-        user = request.user
-        if form.is_valid():
-            gallery = form.cleaned_data['gallery']
-            try:
-                for image in request.FILES.getlist('images'):
-                    Photo.objects.create(image=image, uploaded_by=user, gallery=gallery)
-            except StorageSizeLimitExceeded as e:
-                return HttpResponseBadRequest(str(e))
-            return redirect('base:index')
-        
-    else:
-        form = ImageUploadForm()
-
-    context = {'form':form}
-    return render(request, 'base/upload.html', context)
-
-
-def download_all(request):
-    images = Photo.objects.all()
+def download_all(request, pk):
+    images = Photo.objects.filter(gallery=pk)
     zip_filename = 'images.zip'
     zip_filepath = os.path.join(settings.MEDIA_ROOT, zip_filename)
 
@@ -49,13 +27,6 @@ def download_all(request):
     response = HttpResponse(zip_file, content_type='application/zip')
     response['Content-Disposition'] = 'attachment; filename=%s' % zip_filename
     return response
-
-
-# You can't access this view in any HTML template (this could change in the furure)
-def individual_photo(request, pk):
-    image = Photo.objects.get(id=pk)
-    context = {'image': image}
-    return render(request, 'base/photo.html', context)
 
 
 def galleries(request):
@@ -99,3 +70,32 @@ def photo_upolad_to_gallery(request, pk):
 
     context = {'form':form}
     return render(request, 'base/upload.html', context)
+
+
+# UNUSED CODE:
+
+# def upload_photo(request):
+#     if request.method == "POST":
+#         form = ImageUploadForm(request.POST, request.FILES)
+#         user = request.user
+#         if form.is_valid():
+#             gallery = form.cleaned_data['gallery']
+#             try:
+#                 for image in request.FILES.getlist('images'):
+#                     Photo.objects.create(image=image, uploaded_by=user, gallery=gallery)
+#             except StorageSizeLimitExceeded as e:
+#                 return HttpResponseBadRequest(str(e))
+#             return redirect('base:index')
+        
+#     else:
+#         form = ImageUploadForm()
+
+#     context = {'form':form}
+#     return render(request, 'base/upload.html', context)
+
+
+# You can't access this view in any HTML template (this could change in the furure)
+# def individual_photo(request, pk):
+#     image = Photo.objects.get(id=pk)
+#     context = {'image': image}
+#     return render(request, 'base/photo.html', context)

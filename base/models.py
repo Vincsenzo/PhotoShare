@@ -30,7 +30,6 @@ class Photo(models.Model):
     
     def save(self, *args, **kwargs):
         self.image = compress_image(self.image)
-
         super().save(*args, **kwargs)
 
 
