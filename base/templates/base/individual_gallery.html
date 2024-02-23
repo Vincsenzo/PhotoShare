@@ -18,24 +18,34 @@
         height: auto;
         border-radius: 5px;
     }
-    .button {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        padding: 10px 20px;
-        background-color: rgba(0, 0, 0, 0.5);
-        color: white;
-        border: none;
-        cursor: pointer;
-        opacity: 0;
-        transition: opacity 0.3s ease;
-        border-radius: 10px;
-        text-decoration: none;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    .button,
+    .button-delete {
+      position: absolute;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      padding: 10px 20px;
+      background-color: rgba(0, 0, 0, 0.5);
+      color: white;
+      border: none;
+      cursor: pointer;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      border-radius: 10px;
+      text-decoration: none;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
-    .grid-item:hover .button {
-        opacity: 1;
+
+    .button {
+      left: 30%;
+    }
+
+    .button-delete {
+      left: calc(30% + 110px);
+    }
+
+    .grid-item:hover .button,
+    .grid-item:hover .button-delete {
+      opacity: 1;
     }
     .grid-item:hover .image {
         opacity: 0.5;
@@ -56,8 +66,8 @@
 </style>
 
 <div class="grid-container">
-    <div class="grid-item"><a class="upload-new" href="{% url "base:photo_upolad_to_gallery" pk=pk %}">+ Upload new images</a></div>
-    <div class="grid-item"><a class="upload-new" href="{% url "base:download_all" pk=pk %}">Download all</a></div>
+    <div class="grid-item"><a class="upload-new" href="{% url "base:upolad_to_gallery" pk=gallery_id %}">+ Upload new images</a></div>
+    <div class="grid-item"><a class="upload-new" href="{% url "base:download_all" pk=gallery_id %}">Download all</a></div>
     <div class="grid-item"><a class="upload-new" href="{% url "base:galleries" %}">Galleries</a></div>
 </div>
 
@@ -66,6 +76,7 @@
     <div class="grid-item">
         <img class="image" src="{{image.image.url}}">
         <a class="button" href="{{image.image.url}}" download>Download</a>
+        <a class="button-delete" href="{{image.image.url}}">Delete</a>
     </div>
     {% endfor %}
 </div>

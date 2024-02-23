@@ -51,11 +51,11 @@ def create_gallery(request):
 
 def individual_gallery(request, pk):
     images = Photo.objects.filter(gallery=pk)
-    context = {'images': images, 'pk': pk}
+    context = {'images': images, 'gallery_id': pk}
     return render(request, 'base/individual_gallery.html', context)
 
 
-def photo_upolad_to_gallery(request, pk):
+def upolad_to_gallery(request, pk):
     if request.method == "POST":
         form = ImageUploadForm(request.POST, request.FILES)
         user = request.user
@@ -70,6 +70,11 @@ def photo_upolad_to_gallery(request, pk):
 
     context = {'form':form}
     return render(request, 'base/upload.html', context)
+
+
+# def delete_photo(request, pk):
+#     image = Photo.objects.get(id=pk)
+#     print(image)
 
 
 # UNUSED CODE:
