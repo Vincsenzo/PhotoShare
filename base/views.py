@@ -72,9 +72,9 @@ def upolad_to_gallery(request, pk):
     return render(request, 'base/upload.html', context)
 
 
-# def delete_photo(request, pk):
-#     image = Photo.objects.get(id=pk)
-#     print(image)
+def delete_photo(request, pk):
+    image = Photo.objects.get(id=pk)
+    print(image)
 
 
 # UNUSED CODE:
