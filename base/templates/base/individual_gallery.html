@@ -76,7 +76,7 @@
     <div class="grid-item">
         <img class="image" src="{{image.image.url}}">
         <a class="button" href="{{image.image.url}}" download>Download</a>
-        <a class="button-delete" href="{{image.image.url}}">Delete</a>
+        <a class="button-delete" href="{% url "base:delete_photo" pk1=gallery_id pk2=image.id %}">Delete</a>
     </div>
     {% endfor %}
 </div>

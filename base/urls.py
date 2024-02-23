@@ -13,5 +13,5 @@ urlpatterns = [
     path('create-gallery', views.create_gallery, name='create_gallery'),
     path('galleries/<str:pk>/', views.individual_gallery, name='individual_galley'),
     path('upload/<str:pk>/', views.upolad_to_gallery, name='upolad_to_gallery'),
-    path('delete/<str:pk>/', views.upolad_to_gallery, name='upolad_to_gallery'),
+    path('delete/<int:pk1>/<int:pk2>/', views.delete_photo, name='delete_photo'),
 ]

@@ -9,6 +9,10 @@ def compress_image(image):
     img.thumbnail((1700, 1700))
 
     img_format = image.name.split('.')[-1].upper()
+    
+    # worst fix ever:
+    if img_format == 'JPG':
+        img_format = 'JPEG'
 
     io = BytesIO()
     img.save(io, img_format, qulity=85)

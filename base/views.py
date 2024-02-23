@@ -72,9 +72,12 @@ def upolad_to_gallery(request, pk):
     return render(request, 'base/upload.html', context)
 
 
-def delete_photo(request, pk):
-    image = Photo.objects.get(id=pk)
-    print(image)
+def delete_photo(request, pk1, pk2):
+    image = Photo.objects.get(id=pk2)
+    image_file = image.image.path
+    os.remove(image_file)
+    image.delete()
+    return redirect('base:individual_galley', pk=pk1)
 
 
 # UNUSED CODE:
